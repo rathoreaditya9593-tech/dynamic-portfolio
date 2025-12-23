@@ -1,12 +1,7 @@
-import { ArrowDown, Github, Linkedin, Twitter, Download } from 'lucide-react';
-import { Button } from './ui/button';
+import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import TypeWriter from './TypeWriter';
 
 const Hero = () => {
-  const handleDownloadResume = () => {
-    // In production, link to actual resume file
-    alert('Resume download would start here. Connect your actual resume PDF!');
-  };
-
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 md:pt-0">
       {/* Background Glow */}
@@ -17,15 +12,23 @@ const Hero = () => {
           {/* Profile Image */}
           <div className="mb-8 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             <div className="relative inline-block">
-              <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-primary p-1 animate-float">
-                <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
-                    <span className="text-4xl md:text-5xl font-heading font-bold text-gradient">AS</span>
-                  </div>
+              <div className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-primary p-1 animate-float">
+                <div className="w-full h-full rounded-full bg-card overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                    alt="Ashish Sharma - Professional Developer"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl -z-10 animate-pulse-slow" />
+              
+              {/* Floating particles around profile */}
+              <div className="absolute -top-2 -left-2 w-3 h-3 rounded-full bg-primary/50 animate-float" style={{ animationDelay: '0s' }} />
+              <div className="absolute top-4 -right-4 w-2 h-2 rounded-full bg-accent/50 animate-float" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute -bottom-2 left-8 w-2 h-2 rounded-full bg-primary/40 animate-float" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-8 -right-2 w-2.5 h-2.5 rounded-full bg-accent/40 animate-float" style={{ animationDelay: '1.5s' }} />
             </div>
           </div>
 
@@ -41,50 +44,33 @@ const Hero = () => {
             <span className="text-gradient">Sharma</span>
           </h1>
 
-          {/* Title */}
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-6 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            Problem Solver
-          </h2>
+          {/* Dynamic Role TypeWriter */}
+          <div className="mb-6 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+            <TypeWriter />
+          </div>
 
           {/* Description */}
           <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed animate-fade-up" style={{ animationDelay: '0.5s' }}>
             I create exceptional digital experiences that combine beautiful design with powerful functionality. Let's build something amazing together.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-up" style={{ animationDelay: '0.6s' }}>
-            <Button variant="glow" size="lg" asChild>
-              <a href="#contact">Get In Touch</a>
-            </Button>
-            <Button variant="outline" size="lg" onClick={handleDownloadResume} className="gap-2">
-              <Download size={18} />
-              Download CV
-            </Button>
-          </div>
-
           {/* Social Links */}
-          <div className="flex justify-center gap-4 animate-fade-up" style={{ animationDelay: '0.7s' }}>
+          <div className="flex justify-center gap-4 animate-fade-up" style={{ animationDelay: '0.6s' }}>
             {[
               { icon: Github, href: '#', label: 'GitHub' },
               { icon: Linkedin, href: '#', label: 'LinkedIn' },
               { icon: Twitter, href: '#', label: 'Twitter' },
+              { icon: Instagram, href: '#', label: 'Instagram' },
             ].map((social) => (
               <a
                 key={social.label}
                 href={social.href}
-                className="w-12 h-12 rounded-full border border-border bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
+                className="w-12 h-12 rounded-full border border-border bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/10 hover:scale-110 transition-all duration-300"
                 aria-label={social.label}
               >
                 <social.icon size={20} />
               </a>
             ))}
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-              <ArrowDown size={24} />
-            </a>
           </div>
         </div>
       </div>

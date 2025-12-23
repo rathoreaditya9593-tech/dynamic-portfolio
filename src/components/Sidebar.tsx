@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   Home, 
   User, 
@@ -40,20 +40,15 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
   };
 
   const handleDownloadResume = () => {
-    // Create a dummy resume download (in real app, link to actual resume)
-    const link = document.createElement('a');
-    link.href = '#';
-    link.download = 'Ashish_Sharma_Resume.pdf';
-    // For demo, show toast
     alert('Resume download would start here. Connect your actual resume PDF!');
   };
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button - Right side */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed top-4 left-4 z-[60] md:hidden w-12 h-12 rounded-xl bg-card/90 backdrop-blur-lg border border-border flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
+        className="fixed top-4 right-4 z-[60] md:hidden w-12 h-12 rounded-xl bg-card/90 backdrop-blur-lg border border-border flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
         aria-label="Toggle menu"
       >
         {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -67,22 +62,22 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar - Now on RIGHT side */}
       <aside
         className={cn(
-          "fixed left-0 top-0 h-full z-50 flex flex-col transition-all duration-500 ease-out",
+          "fixed right-0 top-0 h-full z-50 flex flex-col transition-all duration-500 ease-out",
           // Desktop styles
           "md:translate-x-0",
           isExpanded ? "md:w-64" : "md:w-20",
           // Mobile styles
-          isMobileOpen ? "translate-x-0 w-72" : "-translate-x-full md:translate-x-0"
+          isMobileOpen ? "translate-x-0 w-72" : "translate-x-full md:translate-x-0"
         )}
       >
         {/* Sidebar Background */}
-        <div className="absolute inset-0 bg-card/95 backdrop-blur-xl border-r border-border" />
+        <div className="absolute inset-0 bg-card/95 backdrop-blur-xl border-l border-border" />
         
         {/* Glow Effect */}
-        <div className="absolute top-1/2 left-0 w-32 h-64 bg-primary/10 blur-[80px] pointer-events-none" />
+        <div className="absolute top-1/2 right-0 w-32 h-64 bg-primary/10 blur-[80px] pointer-events-none" />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col h-full py-6 px-3">
@@ -96,7 +91,7 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
             </div>
             <span className={cn(
               "font-heading font-bold text-xl text-gradient ml-3 transition-all duration-300",
-              isExpanded || isMobileOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 hidden md:block md:invisible"
+              isExpanded || isMobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 hidden md:block md:invisible"
             )}>
               Ashish.
             </span>
@@ -122,42 +117,44 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
                   )}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  {/* Active Indicator */}
+                  {/* Active Indicator - Right side now */}
                   <div className={cn(
-                    "absolute left-0 top-1/2 -translate-y-1/2 w-1 rounded-full bg-primary transition-all duration-300",
+                    "absolute right-0 top-1/2 -translate-y-1/2 w-1 rounded-full bg-primary transition-all duration-300",
                     isActive ? "h-8 opacity-100" : "h-0 opacity-0"
                   )} />
 
                   {/* Hover Glow */}
                   <div className={cn(
-                    "absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent transition-opacity duration-300",
+                    "absolute inset-0 bg-gradient-to-l from-primary/10 to-transparent transition-opacity duration-300",
                     isHovered || isActive ? "opacity-100" : "opacity-0"
                   )} />
 
-                  {/* Icon */}
+                  {/* Icon with enhanced hover effect */}
                   <div className={cn(
                     "relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300",
-                    isActive ? "bg-primary/20" : "bg-secondary/50 group-hover:bg-primary/10"
+                    isActive ? "bg-primary/20" : "bg-secondary/50 group-hover:bg-primary/10",
+                    isHovered && "scale-110 rotate-6"
                   )}>
                     <item.icon size={20} className={cn(
                       "transition-all duration-300",
-                      isActive && "scale-110"
+                      isActive && "scale-110",
+                      isHovered && "text-primary"
                     )} />
                   </div>
 
                   {/* Label */}
                   <span className={cn(
                     "relative z-10 font-medium text-sm transition-all duration-300 whitespace-nowrap",
-                    isExpanded || isMobileOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 md:hidden"
+                    isExpanded || isMobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 md:hidden"
                   )}>
                     {item.label}
                   </span>
 
-                  {/* Tooltip for collapsed state */}
+                  {/* Tooltip for collapsed state - Left side now */}
                   {!isExpanded && !isMobileOpen && (
                     <div className={cn(
-                      "absolute left-full ml-3 px-3 py-2 rounded-lg bg-card border border-border text-sm font-medium whitespace-nowrap transition-all duration-200 hidden md:block",
-                      isHovered ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 -translate-x-2 pointer-events-none"
+                      "absolute right-full mr-3 px-3 py-2 rounded-lg bg-card border border-border text-sm font-medium whitespace-nowrap transition-all duration-200 hidden md:block",
+                      isHovered ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 translate-x-2 pointer-events-none"
                     )}>
                       {item.label}
                     </div>
@@ -174,27 +171,27 @@ const Sidebar = ({ activeSection }: SidebarProps) => {
               size={isExpanded || isMobileOpen ? "default" : "icon"}
               onClick={handleDownloadResume}
               className={cn(
-                "w-full transition-all duration-300",
+                "w-full transition-all duration-300 group",
                 !isExpanded && !isMobileOpen && "!w-14 !h-14"
               )}
             >
-              <Download size={20} />
+              <Download size={20} className="group-hover:animate-bounce" />
               <span className={cn(
                 "transition-all duration-300",
-                isExpanded || isMobileOpen ? "opacity-100" : "opacity-0 hidden"
+                isExpanded || isMobileOpen ? "opacity-100 ml-2" : "opacity-0 hidden"
               )}>
                 Resume
               </span>
             </Button>
           </div>
 
-          {/* Expand/Collapse Toggle (Desktop only) */}
+          {/* Expand/Collapse Toggle (Desktop only) - Left side now */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-card border border-border rounded-r-lg items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
+            className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-12 bg-card border border-border rounded-l-lg items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
             aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
           >
-            {isExpanded ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
+            {isExpanded ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
           </button>
         </div>
       </aside>
