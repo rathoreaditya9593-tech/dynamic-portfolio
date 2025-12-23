@@ -1,9 +1,14 @@
-import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Twitter, Download } from 'lucide-react';
 import { Button } from './ui/button';
 
 const Hero = () => {
+  const handleDownloadResume = () => {
+    // In production, link to actual resume file
+    alert('Resume download would start here. Connect your actual resume PDF!');
+  };
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
+    <section id="home" className="min-h-screen flex items-center justify-center relative pt-16 md:pt-0">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
       
@@ -51,8 +56,9 @@ const Hero = () => {
             <Button variant="glow" size="lg" asChild>
               <a href="#contact">Get In Touch</a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href="#projects">View Projects</a>
+            <Button variant="outline" size="lg" onClick={handleDownloadResume} className="gap-2">
+              <Download size={18} />
+              Download CV
             </Button>
           </div>
 
